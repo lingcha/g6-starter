@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>设备1</title>
+    <g id="设备1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="矩形" fill="#D9E0FF" points="0 14 18 24.25 36 14 36 22 18 31.5 0 22"></polygon>
+        <polygon id="矩形备份" fill="#FFFFFF" points="0 14 18 24.25 36 14 18 4.25"></polygon>
+        <path d="M18,4 L36,14 L36,22 L18,31.75 L0,22 L0,14 L18,4 Z M1,15.112 L1,21.404 L17.999,30.612 L35,21.403 L35,15.246 L18.2454219,24.6856238 L17.99825,24.8248756 L17.7519305,24.6841216 L1,15.112 Z M18,5.144 L1.558,14.278 L18.002,23.674 L34.562,14.345 L18,5.144 Z M19,15 L19,17 L20.5,17 L18,19 L15.5,17 L17,17 L17,15 L19,15 Z M13,12.5 L13,13.25 L16,13.25 L16,14.75 L13,14.75 L13,15.5 L10,14 L13,12.5 Z M23,12.5 L26,14 L23,15.5 L23,14.75 L20,14.75 L20,13.25 L23,13.25 L23,12.5 Z M18,9 L20.5,11 L19,11 L19,13 L17,13 L17,11 L15.5,11 L18,9 Z" id="矩形" fill="#5D54FF" fill-rule="nonzero"></path>
+    </g>
+</svg>

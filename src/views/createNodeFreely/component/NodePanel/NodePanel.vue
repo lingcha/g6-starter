@@ -15,11 +15,15 @@
     <div>
       <button @click="emit('getData')">获取数据</button>
     </div>
+
+    <div>
+      <button @click="emit('loadData')">加载</button>
+    </div>
   </div>
 </template>
 
 <script setup>
-const emit = defineEmits(['addNode', 'getData','changeEdge'])
+const emit = defineEmits(['addNode', 'getData', 'changeEdge', 'loadData'])
 
 // 节点列表
 const nodeList = [
