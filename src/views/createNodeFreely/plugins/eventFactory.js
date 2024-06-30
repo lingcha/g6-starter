@@ -1,10 +1,17 @@
-import G6, { Graph } from "@antv/g6";
+import G6, {
+  Graph
+} from "@antv/g6";
 
 let clickedNode = null;
 
 function eventFactory(graphInstance, type) {
   if (type === "edit") {
-    return [
+    return [{
+        eventName: "combo:dragend",
+        handler: (e) => {
+          // graphInstance.get("controller").makeNodeFirst();
+        }
+      },
       {
         eventName: "canvas:click",
         handler: (e) => {
@@ -31,7 +38,7 @@ function eventFactory(graphInstance, type) {
           const model = e.item.getModel();
 
           if (model.comboId) {
-            graphInstance.get("controller").makeNodeFirst();
+            // graphInstance.get("controller").makeNodeFirst();
             graphInstance.updateCombo(e.item.getModel().comboId);
           }
 
@@ -40,7 +47,6 @@ function eventFactory(graphInstance, type) {
       {
         eventName: "aftercreateedge",
         handler: () => {
-          console.log("aftercreateedge");
           if (clickedNode)
             graphInstance.setItemState(clickedNode, "click", false);
         },
@@ -49,22 +55,35 @@ function eventFactory(graphInstance, type) {
         eventName: "aftercreateedge",
         handler: (e) => {
           const editor = graphInstance.get("controller");
-          editor.makeNodeFirst(graphInstance);
-          const { triggerLineStyle } = editor.action;
-          graphInstance.updateItem(
-            e.edge,
-            triggerLineStyle(editor.lineStyle, e)
-          );
-          const edges = graphInstance.save().edges;
+          console.log(e)
+          // editor.makeNodeFirst(graphInstance);
+          // const {
+          //   triggerLineStyle
+          // } = editor.action;
+          // const config = triggerLineStyle(editor.lineStyle, e)
+          // graphInstance.updateItem(
+          //   e.edge,
+          //   config
+          // );
+          // const edges = graphInstance.save().edges;
 
-          G6.Util.processParallelEdges(edges);
-          graphInstance.getEdges().forEach((edge, i) => {
-            // edge.toBack();
-            graphInstance.updateItem(edge, {
-              curveOffset: edges[i].curveOffset,
-              curvePosition: edges[i].curvePosition,
-            });
-          });
+          // G6.Util.processParallelEdges(edges);
+          // graphInstance.getEdges().forEach((edge, i) => {
+          //   // edge.toBack();
+          //   graphInstance.updateItem(edge, {
+          //     curveOffset: edges[i].curveOffset,
+          //     curvePosition: edges[i].curvePosition,
+          //   });
+          // });
+        },
+      },
+      {
+        eventName: "aftercreateedge",
+        handler: (e) => {
+          if (e.edge.getSource() === e.edge.getTarget())
+            window.setTimeout(() => {
+              graphInstance.removeItem(e.edge)
+            }, 0)
         },
       },
       {
@@ -73,7 +92,9 @@ function eventFactory(graphInstance, type) {
           const editor = graphInstance.get("controller");
 
           if ("edges" in editor.initData) {
-            const { edges } = editor.initData;
+            const {
+              edges
+            } = editor.initData;
             G6.Util.processParallelEdges(edges);
             graphInstance.getEdges().forEach((edge, i) => {
               graphInstance.updateItem(edge, {
@@ -89,7 +110,7 @@ function eventFactory(graphInstance, type) {
         handler: () => {
           const editor = graphInstance.get("controller");
 
-          editor.makeNodeFirst();
+          // editor.makeNodeFirst();
         },
       },
     ];

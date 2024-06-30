@@ -14,12 +14,15 @@ function action() {
   function triggerLineStyle(lineStyle, e) {
     function calculateTriangleD(e) {
       const size = e.edge.getTarget()._cfg.bboxCache.width;
-      const { lineWidth } = e.edge.getTarget()._cfg.keyShape.getDefaultAttrs();
+      const {
+        lineWidth
+      } = e.edge.getTarget()._cfg.keyShape.getDefaultAttrs();
       return size / 2 + lineWidth * 2;
     }
 
     if (lineStyle === "basic") {
       return {
+        // type: 'single-arrow',
         style: {
           lineWidth: 1,
           lineDash: [3],
@@ -29,7 +32,8 @@ function action() {
     }
     if (lineStyle === "arrow-both") {
       return {
-        style:{
+        type: 'double-arrow',
+        style: {
           startArrow: {
             lineDash: [0],
             fill: "#c5e4fe",
@@ -47,7 +51,7 @@ function action() {
     }
   }
 
-  function addNodeRule(graphInstance,model) {
+  function addNodeRule(graphInstance, model) {
     const t = graphInstance.getCombos().find((item) => {
       return isInCombo(model, item.getBBox());
     });
@@ -60,7 +64,10 @@ function action() {
     }
   }
 
-  return { addNodeRule, triggerLineStyle };
+  return {
+    addNodeRule,
+    triggerLineStyle
+  };
 }
 
 export default action;

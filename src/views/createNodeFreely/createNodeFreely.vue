@@ -8,6 +8,7 @@
 
 <script setup>
 import { ref, onMounted, shallowRef } from 'vue'
+import './component/registerDArrow';
 import './component/registerSafeDev';
 import './component/registerAssets';
 import NodePanel from './component/NodePanel/NodePanel.vue'
@@ -24,21 +25,9 @@ const graphController = shallowRef(null)
 const graphData = {
   // 点集
   nodes: [
-    // {
-    //   id: 'node1',
-    //   size: 50,
-    //   img: fillwall,
-    //   label: '测试',
-    //   error: true,
-    // },
   ],
   // 边集
   edges: [
-    // 表示一条从 node1 节点连接到 node2 节点的边
-    // {
-    //   source: 'node1',
-    //   target: 'node2',
-    // },
   ],
 }
 
@@ -77,19 +66,22 @@ function initGraph() {
           return e.item.getDefaultCfg().type !== 'combo'
         },
         shouldEnd(e, self) {
+
           return e.item.getDefaultCfg().type !== 'combo'
         }
       },
-      { type: 'drag-node', onlyChangeComboSize: false,shouldEnd(e, targetItem){
-        if(targetItem){
-          if(targetItem.getDefaultCfg().type === 'combo'){
-            return true
+      {
+        type: 'drag-node', onlyChangeComboSize: false, shouldEnd(e, targetItem) {
+          if (targetItem) {
+            if (targetItem.getDefaultCfg().type === 'combo') {
+              return true
+            }
           }
         }
-      } },
+      },
       {
         type: 'drag-combo', shouldEnd(e, newParent) {
-          if(newParent){
+          if (newParent) {
             return false
           }
           return true
@@ -103,6 +95,7 @@ function initGraph() {
       type: 'circle-anchors-icon',
     },
     defaultEdge: {
+      type: 'double-arrow',
       style: {
         lineWidth: 1,
         lineDash: [3],

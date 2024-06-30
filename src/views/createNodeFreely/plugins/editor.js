@@ -54,19 +54,21 @@ class GraphController {
       type: nodeData.type === "circle" ? "circle-badge-desc" : nodeData.type,
     };
     // 在这里可以进行一些数据结构的处理，比如检查节点是否已存在等
-    const { addNodeRule } = this.action;
+    const {
+      addNodeRule
+    } = this.action;
     const canAdd = addNodeRule(this.graph, model);
-    if(canAdd){
+    if (canAdd) {
       this.graph.addItem("node", model, false);
-      this.makeNodeFirst();
-    } else{
+      // this.makeNodeFirst();
+    } else {
       window.alert('请先放置安全组')
     }
   }
 
-  updateNode(nodeId,model){
+  updateNode(nodeId, model) {
     const item = this.graph.findById(nodeId)
-    this.graph.updateItem(item,model)
+    this.graph.updateItem(item, model)
   }
 
   // 移除节点
@@ -113,7 +115,14 @@ class GraphController {
   getData() {
     const data = this.graph && this.graph.save();
     const newEdges = data.edges.map((item) => {
-      const { id, source, target, type, startPoint, endPoint } = item;
+      const {
+        id,
+        source,
+        target,
+        type,
+        startPoint,
+        endPoint
+      } = item;
       return {
         id,
         source,
@@ -123,14 +132,17 @@ class GraphController {
         endPoint,
       };
     });
-    const jsonData = JSON.stringify({ ...data, edges: newEdges });
+    const jsonData = JSON.stringify({
+      ...data,
+      edges: newEdges
+    });
     localStorage.setItem("data", jsonData);
     // ceshi 换边样式
   }
 
   makeNodeFirst() {
+    console.log('tofront')
     this.graph.getNodes().forEach((node) => {
-      debugger;
       node.toFront();
     });
   }
